@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'">
+<title>Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div id="upd" class="upd" hidden></div>
+
+<header class="bar">
+  <div class="brand">Radar<span id="team-badge" class="badge" hidden></span></div>
+  <nav class="tabs">
+    <button class="tab is-on" data-view="results">Kết quả</button>
+    <button class="tab" data-view="sources">Nguồn</button>
+    <button class="tab" data-view="calendar">Lịch sự kiện</button>
+    <button class="tab" data-view="settings">Cài đặt</button>
+  </nav>
+  <button id="run" class="run">Chạy</button>
+</header>
+
+<main>
+
+  <!-- KẾT QUẢ -->
+  <section id="view-results" class="view is-on">
+    <div class="spine">
+      <span class="spine-mark">12 tháng trước</span>
+      <span class="spine-line"></span>
+      <span class="spine-now">tuần này</span>
+      <span class="spine-line"></span>
+      <span class="spine-mark">10 tuần tới</span>
+    </div>
+    <div id="meta" class="meta"></div>
+    <div id="export" class="export" hidden>
+      <button id="ex-csv" class="btn">Xuất file CSV</button>
+      <button id="ex-sheet" class="btn">Ghi đè lên Google Sheet</button>
+      <span id="ex-msg" class="ex-msg"></span>
+    </div>
+    <div id="log" class="log" hidden></div>
+    <div id="results"></div>
+  </section>
+
+  <!-- NGUỒN -->
+  <section id="view-sources" class="view">
+    <div class="lede">
+      <h2>Nguồn đọc</h2>
+      <p>Feed RSS của subreddit, blog và báo ngành. Hai mươi nguồn đúng ngành cho kết quả tốt hơn hai trăm nguồn chung chung.</p>
+    </div>
+    <div class="row-add">
+      <input id="src-url" type="url" placeholder="https://www.reddit.com/r/tênsub/new.rss">
+      <input id="src-label" type="text" placeholder="Tên gọi">
+      <button id="src-add" class="btn">Thêm nguồn</button>
+    </div>
+    <div class="row-add">
+      <button id="src-suggest" class="btn">Tìm nguồn tự động</button>
+      <button id="src-add-all" class="btn" hidden>Thêm tất cả đạt ngưỡng</button>
+      <span id="src-sug-msg" class="ex-msg"></span>
+    </div>
+    <div id="src-sug" class="sug" hidden></div>
+    <p class="hint">Subreddit dùng dạng <code>reddit.com/r/tênsub/new.rss</code>. Tìm kiếm theo từ khoá dùng <code>reddit.com/search.rss?q=từ+khoá&amp;sort=new</code>.</p>
+    <ul id="src-list" class="list"></ul>
+  </section>
+
+  <!-- LỊCH -->
+  <section id="view-calendar" class="view">
+    <div class="lede">
+      <h2>Lịch sự kiện</h2>
+      <p>Những gì đã biết trước ngày: ra mắt sản phẩm, quy định có hiệu lực, mùa vụ, sự kiện thể thao. Radar sẽ đối chiếu từ khoá của chủ đề với lịch này trong cửa sổ 10 tuần tới.</p>
+    </div>
+    <div class="row-add">
+      <input id="cal-date" type="date">
+      <input id="cal-title" type="text" placeholder="Sự kiện">
+      <input id="cal-note" type="text" placeholder="Từ khoá liên quan">
+      <button id="cal-add" class="btn">Thêm sự kiện</button>
+    </div>
+    <ul id="cal-list" class="list"></ul>
+  </section>
+
+  <!-- CÀI ĐẶT -->
+  <section id="view-settings" class="view">
+    <div class="lede">
+      <h2>Cài đặt</h2>
+      <p>Khoá API và mọi dữ liệu chỉ nằm trên máy này.</p>
+    </div>
+    <div class="fields">
+      <label>Nhà cung cấp
+        <select id="s-provider">
+          <option value="anthropic">Anthropic</option>
+          <option value="gemini">Google Gemini</option>
+        </select>
+      </label>
+      <label><span id="s-key-label">Anthropic API key</span>
+        <input id="s-key" type="password" placeholder="sk-ant-...">
+        <span id="s-key-note" class="hint" style="margin:0"></span>
+      </label>
+      <label>Model
+        <input id="s-model" type="text">
+        <button id="s-model-list" class="btn" type="button">Xem model khả dụng</button>
+        <span id="s-model-out" class="hint" style="margin:0"></span>
+      </label>
+      <label>Ngành của bạn
+        <input id="s-industry" type="text" placeholder="ví dụ: đồ dùng cho thú cưng">
+      </label>
+      <label>Thị trường
+        <input id="s-markets" type="text">
+      </label>
+      <label>Cửa sổ thời gian (ngày)
+        <input id="s-window" type="number" min="1" max="90">
+      </label>
+      <label>Giãn cách giữa các lần gọi Reddit (ms)
+        <input id="s-delay" type="number" min="0" step="500">
+      </label>
+      <label>Tên tài khoản Reddit
+        <input id="s-reddit" type="text" placeholder="tên_của_bạn (không có /u/)">
+      </label>
+      <label>Tự tìm nguồn khi chưa có nguồn nào
+        <select id="s-auto">
+          <option value="1">Bật</option>
+          <option value="0">Tắt</option>
+        </select>
+      </label>
+      <label>Điểm tối thiểu để tự thêm nguồn (0-10)
+        <input id="s-thresh" type="number" min="0" max="10">
+      </label>
+      <label>Kho GitHub để nhận bản mới
+        <input id="s-repo" type="text" placeholder="tên_tài_khoản/radar">
+      </label>
+    </div>
+    <p class="hint">Reddit bắt buộc mỗi công cụ khai báo danh tính kèm thông tin liên hệ, và chặn những cái không khai. Nhập tên tài khoản Reddit của bạn vào ô trên là cách hợp lệ để hết lỗi 403. Không cần mật khẩu, chỉ cần tên.</p>
+    <p class="hint" id="datadir"></p>
+
+    <div id="sheet-block">
+    <div class="lede" style="margin-top:34px">
+      <h2>Google Sheet</h2>
+      <p>Không bắt buộc. Bỏ trống thì vẫn xuất được file CSV để tự nhập vào Sheet.</p>
+    </div>
+    <div class="fields">
+      <label>Đường dẫn Google Sheet
+        <input id="s-sheet" type="url" placeholder="https://docs.google.com/spreadsheets/d/...">
+      </label>
+      <label>Tên tab trong Sheet
+        <input id="s-tab" type="text" placeholder="Radar">
+      </label>
+      <label>Khoá service account
+        <button id="s-key-pick" class="btn" type="button">Chọn file JSON</button>
+      </label>
+    </div>
+    <p class="hint" id="s-key-info">Chưa chọn khoá.</p>
+
+    <div class="note">
+      <h3>Cách bật ghi vào Google Sheet</h3>
+      <ol>
+        <li>Vào console.cloud.google.com, tạo một project, bật <b>Google Sheets API</b>.</li>
+        <li>Mục Credentials, tạo một <b>Service account</b>, rồi tạo khoá dạng JSON và tải về.</li>
+        <li>Chọn file JSON đó ở trên. Radar chỉ lưu đường dẫn, không sao chép khoá vào dữ liệu của mình.</li>
+        <li>Mở Google Sheet của bạn, bấm Share, thêm email của service account với quyền <b>Editor</b>. Email đó hiện ngay bên dưới sau khi bạn chọn khoá.</li>
+      </ol>
+      <p>Cách này không cần màn hình đồng ý của Google và không có token hết hạn. Mỗi lần ghi là xoá sạch tab rồi viết lại từ đầu, nên đừng dùng chung tab đó với dữ liệu bạn tự nhập tay.</p>
+    </div>
+    </div>
+
+    <div id="sheet-locked" class="note" hidden style="margin-top:34px">
+      <h3>Google Sheet</h3>
+      <p>Bản phát hành này đã gắn sẵn Sheet của team bạn. Bấm <b>Ghi đè lên Google Sheet</b> ở tab Kết quả là xong, không cần cấu hình gì.</p>
+    </div>
+
+    <div class="note" style="margin-top:22px">
+      <h3>Về tầng so sánh cùng kỳ</h3>
+      <p>Không có API Google Trends công khai, nên Radar tự dựng kho lưu trữ: mỗi lần chạy, nó ghi lại tần suất từ khoá của tuần đó. Tầng này sẽ trống trong năm đầu và chỉ bắt đầu trả lời được khi có dữ liệu của cùng tuần năm ngoái. Radar sẽ ghi rõ "chưa có dữ liệu" thay vì đoán.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

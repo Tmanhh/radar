@@ -1,0 +1,4 @@
+node_modules/
+dist/
+teams/*/service-account.json
+team/
