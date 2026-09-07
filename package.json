@@ -1,6 +1,6 @@
 {
   "name": "radar",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Doc tin, loc theo thoi diem, trich pain point, goi y san pham",
   "main": "main.js",
   "scripts": {
