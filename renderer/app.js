@@ -404,9 +404,16 @@ function paintResults() {
   box.innerHTML = r.clusters
     .map((c) => {
       // Lay o dau thi ghi o day. Khong can trich dan dai, chi can duong dan.
-      const seenLinks = new Set();
+      // Gop theo nhan, khong theo duong dan: hai bai khac nhau cung mot sub
+      // van chi la mot nguon.
+      const seenSrc = new Set();
       const links = (c.quotes || [])
-        .filter((q) => q.link && !seenLinks.has(q.link) && seenLinks.add(q.link))
+        .filter((q) => {
+          const k = (q.source || hostOf(q.link || '')).toLowerCase();
+          if (!q.link || !k || seenSrc.has(k)) return false;
+          seenSrc.add(k);
+          return true;
+        })
         .slice(0, 4)
         .map(
           (q) =>

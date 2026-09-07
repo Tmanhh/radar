@@ -708,13 +708,21 @@ Tra ve DUY NHAT mot mang JSON, khong loi dan:
 }]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 const SYSTEM_PRODUCT = `Ban nhan mot danh sach van de khach hang da duoc trich xuat.
 Nhiem vu: tim san pham co the BAN ONLINE duoc, khong phai tim giai phap ky thuat dung.
@@ -776,13 +784,21 @@ Tra ve DUY NHAT mang JSON (co the rong):
 }]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 /* ---------- xuat du lieu ---------- */
 
@@ -980,13 +996,21 @@ De xuat 8-10 ngach. Tra ve DUY NHAT mang JSON:
 }]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 async function suggestNiches(settings, usage, existing) {
   if (!settings.apiKey) throw new Error('Chua co API key. Vao Cai dat de nhap.');
@@ -1065,13 +1089,21 @@ Tra ve DUY NHAT mang JSON:
  {"type":"news","query":"tu khoa tieng Anh","why":"mot cau ngan"}]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 const SYSTEM_SCORE = `Ban duoc cho tieu de bai THAT lay tu vai nguon (subreddit hoac trang web). Cham diem tung nguon.
 
@@ -1089,13 +1121,21 @@ Tra ve DUY NHAT mang JSON:
 [{"name":"ten nguon dung nhu duoc cung cap","score":<0-10>,"verdict":"mot cau ngan bang tieng Viet","evidence":"mot tieu de that the hien ro nhat"}]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 // Blog khong co duong feed thong nhat. Doc the <link rel="alternate"> trong
 // trang chu truoc, vi do la cho trang tu khai bao. Khong co thi thu cac
@@ -1442,13 +1482,21 @@ Tra ve DUY NHAT mang JSON (co the rong):
 }]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 async function detectEvents(items, settings, usage, report) {
   if (!items.length) return [];
@@ -1511,13 +1559,21 @@ Tra ve DUY NHAT mang JSON (co the rong):
 }]
 
 NGON NGU DAU RA — BAT BUOC:
-Viết tiếng Việt có dấu đầy đủ. Ví dụ đúng: "Cung cấp giải pháp bơm nhiên liệu
-siêu bền, cho phép thay van bên trong thay vì vứt bỏ cả bơm."
-Ví dụ SAI, tuyệt đối không viết như thế này: "Cung cap giai phap bom nhien lieu".
-Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
 
-Riêng trường trích dẫn nguyên văn thì giữ nguyên ngôn ngữ gốc của bài viết,
-không dịch.`;
+1. TEN CHU DE va TEN SAN PHAM: viết bằng NGÔN NGỮ CỦA THỊ TRƯỜNG (thường là
+   tiếng Anh), rồi mở ngoặc dịch tiếng Việt.
+   Đúng:  "Paint correction compound (dung dịch đánh bóng phục hồi sơn)"
+   Đúng:  "Billet aluminum mechanical fuel pump (bơm nhiên liệu cơ nhôm billet)"
+   SAI:   "Dung dịch đánh bóng phục hồi sơn"
+   Lý do: người dùng bán ở thị trường đó, cần đúng từ khoá để tra nhà cung cấp
+   và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+2. MỌI TRƯỜNG CÒN LẠI — mô tả, lý do, rủi ro, đánh giá — viết tiếng Việt
+   có dấu đầy đủ. Ví dụ đúng: "Bỏ pin đi thì bỏ luôn nguyên nhân hỏng."
+   SAI, tuyệt đối không viết như thế này: "Bo pin di thi bo luon nguyen nhan".
+   Prompt này viết không dấu chỉ vì lý do kỹ thuật — đừng bắt chước.
+
+3. TRÍCH DẪN NGUYÊN VĂN: giữ nguyên ngôn ngữ gốc của bài viết, không dịch.`;
 
 async function productsFromEvents(events, settings, usage, report) {
   if (!events.length) return [];
@@ -1635,6 +1691,22 @@ function learnedBlock() {
     `\n\nDU LIEU THAT TU CAC LAN TEST TRUOC (mau con nho, dung coi la luat):\n${t.text}\n` +
     `Uu tien de xuat giong dac diem cua nhung cai da an, nhung dung bo qua thu moi chi vi no khac.`
   );
+}
+
+// Mo hinh ghi nguon moi luc mot kieu: "r/CarAV", "Reddit r/CarAV", "Reddit".
+// Chuan hoa ve mot dang de chip nguon khong lap va khong loan.
+function tidySource(raw, link) {
+  let t = String(raw || '').trim();
+  t = t.replace(/^reddit[\s:—-]*/i, '');
+  const m = /r\/([A-Za-z0-9_]+)/.exec(t) || (link && /reddit\.com\/r\/([A-Za-z0-9_]+)/.exec(link));
+  if (m) return 'r/' + m[1];
+  if (t) return t.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+  if (link) {
+    try {
+      return new URL(link).hostname.replace(/^www\./, '');
+    } catch {}
+  }
+  return '';
 }
 
 /* ---------- gop cum va lich su ---------- */
@@ -1927,6 +1999,10 @@ async function runPipeline(state, report, stage) {
     c.yoyKnown = lastYear != null;
 
     c.score = [c.signalHot, c.signalUpcoming, c.signalYoY].filter(Boolean).length;
+  }
+
+  for (const c of clusters) {
+    for (const q of c.quotes || []) q.source = tidySource(q.source, q.link);
   }
 
   // Gan ngach cho tung cum, dua vao nguon cua trich dan.

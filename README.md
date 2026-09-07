@@ -365,11 +365,25 @@ Nút **Lưu nhật ký gỡ lỗi** trong Cài đặt xuất ra file JSON gồm 
 
 Chỉ giữ trong bộ nhớ của phiên đang chạy, không ghi ra đĩa cho tới khi bạn bấm lưu.
 
+## Ngôn ngữ đầu ra
+
+**Tên chủ đề và tên sản phẩm viết bằng ngôn ngữ thị trường, mở ngoặc dịch tiếng Việt:**
+
+> Paint correction compound (dung dịch đánh bóng phục hồi sơn)
+
+Bạn bán ở thị trường nói tiếng Anh nên cần đúng từ khoá để tra nhà cung cấp và tra đối thủ. Tiếng Việt một mình thì tra không ra gì.
+
+**Mọi phần còn lại — mô tả, lý do, rủi ro — viết tiếng Việt có dấu.** Đó là phần để bạn đọc, không phải để tra.
+
+**Trích dẫn nguyên văn giữ nguyên tiếng gốc**, không dịch, vì đó là bằng chứng.
+
 ## Đọc kết quả
 
 Mỗi chủ đề hiện: điểm, tên, bốn dấu hiệu, **chip nguồn** bấm được, rồi các đề xuất sản phẩm.
 
 Chip nguồn ghi đúng nơi lấy được — `r/robotvacuums` cho Reddit, tên miền cho trang web. Bấm vào mở bài gốc.
+
+Nhãn được **chuẩn hoá và gộp**: mô hình ghi lúc thì `r/CarAV`, lúc `Reddit r/CarAV`, lúc chỉ `Reddit` — Radar quy về một dạng, và ba bài từ cùng một sub chỉ hiện một chip.
 
 Mô tả vấn đề và trích dẫn nguyên văn **vẫn có trong file xuất và trong Sheet**, chỉ không hiện trong app để danh sách gọn và quét nhanh hơn.
 
