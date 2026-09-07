@@ -1,12 +1,52 @@
 name: Build
 
-# Day mot tag dang v1.2.3, hoac bam tay trong tab Actions.
+# Đẩy một tag dạng v1.2.3, hoặc bấm tay trong tab Actions.
 on:
   push:
     tags: ['v*']
   workflow_dispatch:
 
 jobs:
+  # Bản cá nhân: không cần Secret nào.
+  personal:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Build
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "macOS" ]; then
+            npm run build:mac
+          else
+            npm run build:win
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: radar-${{ runner.os }}
+          path: |
+            dist/*.dmg
+            dist/*.exe
+          if-no-files-found: warn
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/*.dmg
+            dist/*.exe
+          fail_on_unmatched_files: false
+
+  # Bản riêng cho từng team. Bỏ qua team nào chưa có Secret.
   build:
     strategy:
       fail-fast: false
@@ -16,30 +56,26 @@ jobs:
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - run: npm install
-
-      # Khoa service account KHONG nam trong repo. Moi team mot Secret rieng:
-      # SA_S1 ... SA_S4, noi dung la ca file JSON cua service account do.
-      - name: Ghi khoa service account
+      - name: Ghi cấu hình bí mật của team
         shell: bash
         env:
-          SA: ${{ secrets[format('SA_{0}', matrix.team)] }}
+          SEC: ${{ secrets[format('TEAM_{0}', matrix.team)] }}
         run: |
-          if [ -z "$SA" ]; then
-            echo "Thieu secret SA_${{ matrix.team }}"; exit 1
+          if [ -z "$SEC" ]; then
+            echo "Chua co secret TEAM_${{ matrix.team }} — bo qua team nay."
+            echo "skip=1" >> "$GITHUB_ENV"
+            exit 0
           fi
-          printf '%s' "$SA" > "teams/${{ matrix.team }}/service-account.json"
-
+          printf '%s' "$SEC" > "teams/${{ matrix.team }}/secret.json"
       - name: Build
+        if: env.skip != '1'
         shell: bash
         run: |
           if [ "${{ runner.os }}" = "macOS" ]; then
@@ -47,14 +83,12 @@ jobs:
           else
             node build-team.js ${{ matrix.team }} --win
           fi
-
-      - name: Xoa khoa khoi may build
+      - name: Xoá cấu hình bí mật khỏi máy build
         if: always()
         shell: bash
-        run: rm -f "teams/${{ matrix.team }}/service-account.json"
-
+        run: rm -f "teams/${{ matrix.team }}/secret.json"
       - uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
+        if: env.skip != '1' && startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             dist/*.dmg
