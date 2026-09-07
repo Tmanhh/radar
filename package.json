@@ -29,13 +29,13 @@
         {
           "target": "dmg",
           "arch": [
-            "universal"
+            "arm64"
           ]
         }
       ],
       "category": "public.app-category.business",
       "identity": null,
-      "artifactName": "Radar-${version}-mac.${ext}",
+      "artifactName": "Radar-${version}-mac-arm64.${ext}",
       "icon": "build/icon.png"
     },
     "win": {

@@ -11,43 +11,71 @@
 
 <div id="upd" class="upd" hidden></div>
 
-<header class="bar">
-  <div class="brand">Radar<span id="team-badge" class="badge" hidden></span></div>
+<header class="topbar">
+  <div class="brand"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><path d="M 50.0 11.5 C 57.0 20.1 57.0 31.5 50.0 40.0 C 43.0 31.5 43.0 20.1 50.0 11.5 Z"/><path d="M 88.5 50.0 C 80.0 57.0 68.5 57.0 60.0 50.0 C 68.5 43.0 80.0 43.0 88.5 50.0 Z"/><path d="M 50.0 88.5 C 43.0 80.0 43.0 68.5 50.0 60.0 C 57.0 68.5 57.0 80.0 50.0 88.5 Z"/><path d="M 11.5 50.0 C 20.1 43.0 31.5 43.0 40.0 50.0 C 31.5 57.0 20.1 57.0 11.5 50.0 Z"/><path d="M 81.1 18.9 C 79.4 31.6 69.8 41.2 57.1 42.9 C 58.8 30.2 68.4 20.6 81.1 18.9 Z"/><path d="M 81.1 81.1 C 68.4 79.4 58.8 69.8 57.1 57.1 C 69.8 58.8 79.4 68.4 81.1 81.1 Z"/><path d="M 18.9 81.1 C 20.6 68.4 30.2 58.8 42.9 57.1 C 41.2 69.8 31.6 79.4 18.9 81.1 Z"/><path d="M 18.9 18.9 C 31.6 20.6 41.2 30.2 42.9 42.9 C 30.2 41.2 20.6 31.6 18.9 18.9 Z"/><circle cx="50.0" cy="50.0" r="5.2"/></svg>Radar<span id="team-badge" class="badge" hidden></span></div>
   <nav class="tabs">
     <button class="tab is-on" data-view="results">Kết quả</button>
+    <button class="tab" data-view="track">Theo dõi</button>
+    <button class="tab" data-view="niches">Ngách</button>
     <button class="tab" data-view="sources">Nguồn</button>
     <button class="tab" data-view="calendar">Lịch sự kiện</button>
     <button class="tab" data-view="settings">Cài đặt</button>
   </nav>
   <button id="run" class="run">Chạy</button>
+  <button id="stop" class="run stop" hidden>Dừng</button>
 </header>
 
 <main>
 
   <!-- KẾT QUẢ -->
   <section id="view-results" class="view is-on">
-    <div class="spine">
-      <span class="spine-mark">12 tháng trước</span>
-      <span class="spine-line"></span>
-      <span class="spine-now">tuần này</span>
-      <span class="spine-line"></span>
-      <span class="spine-mark">10 tuần tới</span>
-    </div>
     <div id="meta" class="meta"></div>
     <div id="export" class="export" hidden>
       <button id="ex-csv" class="btn">Xuất file CSV</button>
       <button id="ex-sheet" class="btn">Ghi đè lên Google Sheet</button>
       <span id="ex-msg" class="ex-msg"></span>
     </div>
-    <div id="log" class="log" hidden></div>
+    <div id="run-panel" class="runpanel" hidden>
+      <div class="rp-head">
+        <span id="rp-title">Đang chạy</span>
+        <span id="rp-time" class="rp-time">0:00</span>
+      </div>
+      <ol id="rp-steps" class="rp-steps"></ol>
+      <button id="rp-toggle" class="rp-toggle" type="button">Xem chi tiết</button>
+      <div id="log" class="log" hidden></div>
+    </div>
+    <div id="ev-ideas"></div>
     <div id="results"></div>
+  </section>
+
+  <!-- THEO DÕI -->
+  <section id="view-track" class="view">
+    <div class="lede">
+      <h2>Theo dõi kết quả</h2>
+      <p>Mỗi gợi ý bạn thấy đáng thì thêm vào đây, rồi đánh dấu kết quả sau khi test. Sau vài tháng bạn biết tỉ lệ đúng thật của tool thay vì đoán.</p>
+    </div>
+    <div id="track-stats" class="tstats"></div>
+    <div id="track-list"></div>
+  </section>
+
+  <!-- NGÁCH -->
+  <section id="view-niches" class="view">
+    <div class="lede">
+      <h2>Ngách con</h2>
+      <p>Ngành trong Cài đặt thường quá rộng để tìm nguồn cho ra. Radar chẻ nó thành ngách con, bạn tick cái nào đáng theo.</p>
+    </div>
+    <div class="row-add">
+      <button id="niche-find" class="btn">Chẻ ngành thành ngách con</button>
+      <span id="niche-msg" class="ex-msg"></span>
+    </div>
+    <div id="niche-list"></div>
   </section>
 
   <!-- NGUỒN -->
   <section id="view-sources" class="view">
     <div class="lede">
-      <h2>Nguồn đọc</h2>
-      <p>Feed RSS của subreddit, blog và báo ngành. Hai mươi nguồn đúng ngành cho kết quả tốt hơn hai trăm nguồn chung chung.</p>
+      <h2>Nguồn</h2>
+      <p>Bỏ trống cũng được — Radar tự tìm khi bạn bấm Chạy. Thêm tay khi bạn có nguồn riêng muốn theo dõi.</p>
     </div>
     <div class="row-add">
       <input id="src-url" type="url" placeholder="https://www.reddit.com/r/tênsub/new.rss">
@@ -68,7 +96,7 @@
   <section id="view-calendar" class="view">
     <div class="lede">
       <h2>Lịch sự kiện</h2>
-      <p>Những gì đã biết trước ngày: ra mắt sản phẩm, quy định có hiệu lực, mùa vụ, sự kiện thể thao. Radar sẽ đối chiếu từ khoá của chủ đề với lịch này trong cửa sổ 10 tuần tới.</p>
+      <p>Những gì đã biết trước ngày: ra mắt sản phẩm, quy định có hiệu lực, mùa vụ. Radar đối chiếu từ khoá chủ đề với lịch này trong 10 tuần tới.</p>
     </div>
     <div class="row-add">
       <input id="cal-date" type="date">
@@ -77,6 +105,12 @@
       <button id="cal-add" class="btn">Thêm sự kiện</button>
     </div>
     <ul id="cal-list" class="list"></ul>
+
+    <div id="auto-events" hidden>
+      <h3 class="grp" data-mt="34">Sự kiện Radar tự tìm được</h3>
+      <p class="hint">Từ chính các bài đã đọc ở lần chạy gần nhất. Mỗi cái phải gắn được vào một cơ chế sinh cầu và có câu trích làm căn cứ, nếu không thì bị loại ngay. Bấm Giữ để đưa vào lịch của bạn.</p>
+      <div id="auto-list"></div>
+    </div>
   </section>
 
   <!-- CÀI ĐẶT -->
@@ -85,6 +119,7 @@
       <h2>Cài đặt</h2>
       <p>Khoá API và mọi dữ liệu chỉ nằm trên máy này.</p>
     </div>
+    <h3 class="grp">Mô hình</h3>
     <div class="fields">
       <label>Nhà cung cấp
         <select id="s-provider">
@@ -94,15 +129,28 @@
       </label>
       <label><span id="s-key-label">Anthropic API key</span>
         <input id="s-key" type="password" placeholder="sk-ant-...">
-        <span id="s-key-note" class="hint" style="margin:0"></span>
+        <span id="s-key-note" class="hint" data-mt="0" data-mb="0"></span>
       </label>
       <label>Model
-        <input id="s-model" type="text">
+        <input id="s-model" type="text" placeholder="model-a, model-b, model-c">
         <button id="s-model-list" class="btn" type="button">Xem model khả dụng</button>
-        <span id="s-model-out" class="hint" style="margin:0"></span>
+        <span id="s-model-out" class="hint" data-mt="0" data-mb="0"></span>
+        <span class="hint" data-mt="0" data-mb="0">Điền nhiều model cách nhau bằng dấu phẩy. Hạn mức của Gemini tính theo từng model, nên ba model là gần ba lần thông lượng. Model nào hết hạn mức thì Radar tự chuyển sang model khác thay vì ngồi chờ.</span>
       </label>
+      <label>Số lượt gọi model mỗi phút
+        <input id="s-rpm" type="number" min="1" max="60">
+        <span class="hint" data-mt="0" data-mb="0">Bậc miễn phí của Gemini cho khoảng 10 lượt mỗi phút. Một lần chạy gọi 15–20 lượt, nên Radar tự giãn nhịp để không đâm vào trần. Hạ xuống nếu vẫn gặp lỗi 429.</span>
+      </label>
+      <label>Model cho bước suy luận
+        <input id="s-model2" type="text" placeholder="bỏ trống thì dùng model trên">
+        <span class="hint" data-mt="0" data-mb="0">Bước suy sản phẩm từ sự kiện chỉ chạy một lần mỗi lần chạy. Dùng model mạnh hơn ở đây tốn thêm không đáng kể mà chất lượng khác hẳn.</span>
+      </label>
+    </div>
+
+    <h3 class="grp">Phạm vi phân tích</h3>
+    <div class="fields">
       <label>Ngành của bạn
-        <input id="s-industry" type="text" placeholder="ví dụ: đồ dùng cho thú cưng">
+        <input id="s-industry" type="text" placeholder="ví dụ: đồ dùng cho chó cỡ lớn">
       </label>
       <label>Thị trường
         <input id="s-markets" type="text">
@@ -110,12 +158,10 @@
       <label>Cửa sổ thời gian (ngày)
         <input id="s-window" type="number" min="1" max="90">
       </label>
-      <label>Giãn cách giữa các lần gọi Reddit (ms)
-        <input id="s-delay" type="number" min="0" step="500">
-      </label>
-      <label>Tên tài khoản Reddit
-        <input id="s-reddit" type="text" placeholder="tên_của_bạn (không có /u/)">
-      </label>
+    </div>
+
+    <h3 class="grp">Nguồn</h3>
+    <div class="fields">
       <label>Tự tìm nguồn khi chưa có nguồn nào
         <select id="s-auto">
           <option value="1">Bật</option>
@@ -125,49 +171,74 @@
       <label>Điểm tối thiểu để tự thêm nguồn (0-10)
         <input id="s-thresh" type="number" min="0" max="10">
       </label>
+      <label>Giá tối thiểu của sản phẩm ($)
+        <input id="s-pmin" type="number" min="0" step="5">
+      </label>
+      <label>Giá tối đa của sản phẩm ($)
+        <input id="s-pmax" type="number" min="0" step="10">
+      </label>
+      <label>Giãn cách giữa các lần gọi Reddit (ms)
+        <input id="s-delay" type="number" min="0" step="500">
+      </label>
+      <label>Tên tài khoản Reddit
+        <input id="s-reddit" type="text" placeholder="tên_của_bạn (không có /u/)">
+      </label>
+    </div>
+
+    <p class="hint">Reddit bắt buộc mỗi công cụ khai báo danh tính kèm thông tin liên hệ, và chặn những cái không khai. Nhập tên tài khoản Reddit của bạn vào ô trên là cách hợp lệ để hết lỗi 403. Không cần mật khẩu, chỉ cần tên.</p>
+    <h3 class="grp">Cập nhật và cấu hình</h3>
+    <div class="fields">
       <label>Kho GitHub để nhận bản mới
         <input id="s-repo" type="text" placeholder="tên_tài_khoản/radar">
       </label>
     </div>
-    <p class="hint">Reddit bắt buộc mỗi công cụ khai báo danh tính kèm thông tin liên hệ, và chặn những cái không khai. Nhập tên tài khoản Reddit của bạn vào ô trên là cách hợp lệ để hết lỗi 403. Không cần mật khẩu, chỉ cần tên.</p>
+    <div class="row-add" data-mt="6">
+      <button id="cfg-export" class="btn">Xuất cấu hình</button>
+      <button id="cfg-import" class="btn">Nhập cấu hình</button>
+      <button id="dbg-save" class="btn">Lưu nhật ký gỡ lỗi</button>
+      <span id="cfg-msg" class="ex-msg"></span>
+    </div>
+    <p class="hint">Xuất ra file gồm nguồn, lịch sự kiện và các thiết lập chung. <b>Không</b> gồm API key hay token — đó là của riêng từng người.</p>
+
+    <div id="spend" class="note" data-mb="22"></div>
+
     <p class="hint" id="datadir"></p>
 
     <div id="sheet-block">
-    <div class="lede" style="margin-top:34px">
+    <div class="lede" data-mt="34">
       <h2>Google Sheet</h2>
-      <p>Không bắt buộc. Bỏ trống thì vẫn xuất được file CSV để tự nhập vào Sheet.</p>
+      <p>Không bắt buộc. Bỏ trống thì vẫn xuất được file CSV.</p>
     </div>
     <div class="fields">
-      <label>Đường dẫn Google Sheet
-        <input id="s-sheet" type="url" placeholder="https://docs.google.com/spreadsheets/d/...">
+      <label>Địa chỉ Web App
+        <input id="s-weburl" type="url" placeholder="https://script.google.com/macros/s/.../exec">
       </label>
-      <label>Tên tab trong Sheet
-        <input id="s-tab" type="text" placeholder="Radar">
+      <label>Token
+        <input id="s-webtoken" type="password" placeholder="token của bạn">
       </label>
-      <label>Khoá service account
-        <button id="s-key-pick" class="btn" type="button">Chọn file JSON</button>
+      <label>Link Google Sheet
+        <input id="s-sheeturl" type="url" placeholder="https://docs.google.com/spreadsheets/d/...">
       </label>
     </div>
-    <p class="hint" id="s-key-info">Chưa chọn khoá.</p>
 
     <div class="note">
       <h3>Cách bật ghi vào Google Sheet</h3>
       <ol>
-        <li>Vào console.cloud.google.com, tạo một project, bật <b>Google Sheets API</b>.</li>
-        <li>Mục Credentials, tạo một <b>Service account</b>, rồi tạo khoá dạng JSON và tải về.</li>
-        <li>Chọn file JSON đó ở trên. Radar chỉ lưu đường dẫn, không sao chép khoá vào dữ liệu của mình.</li>
-        <li>Mở Google Sheet của bạn, bấm Share, thêm email của service account với quyền <b>Editor</b>. Email đó hiện ngay bên dưới sau khi bạn chọn khoá.</li>
+        <li>Mở <b>script.google.com</b>, tạo project mới.</li>
+        <li>Dán toàn bộ nội dung <code>apps-script/Code.gs</code> vào, sửa phần <code>TEAMS</code> ở đầu file.</li>
+        <li><b>Deploy → New deployment → Web app.</b> Chọn <i>Execute as: Me</i> và <i>Who has access: Anyone</i>.</li>
+        <li>Copy địa chỉ hiện ra, dán vào ô trên cùng với token của team.</li>
       </ol>
-      <p>Cách này không cần màn hình đồng ý của Google và không có token hết hạn. Mỗi lần ghi là xoá sạch tab rồi viết lại từ đầu, nên đừng dùng chung tab đó với dữ liệu bạn tự nhập tay.</p>
+      <p>Không cần Google Cloud, không cần service account, không có màn hình OAuth nào. Mỗi lần ghi là xoá sạch tab rồi viết lại, nên đừng dùng chung tab đó với dữ liệu nhập tay.</p>
     </div>
     </div>
 
-    <div id="sheet-locked" class="note" hidden style="margin-top:34px">
+    <div id="sheet-locked" class="note" hidden data-mt="34">
       <h3>Google Sheet</h3>
       <p>Bản phát hành này đã gắn sẵn Sheet của team bạn. Bấm <b>Ghi đè lên Google Sheet</b> ở tab Kết quả là xong, không cần cấu hình gì.</p>
     </div>
 
-    <div class="note" style="margin-top:22px">
+    <div class="note" data-mt="22">
       <h3>Về tầng so sánh cùng kỳ</h3>
       <p>Không có API Google Trends công khai, nên Radar tự dựng kho lưu trữ: mỗi lần chạy, nó ghi lại tần suất từ khoá của tuần đó. Tầng này sẽ trống trong năm đầu và chỉ bắt đầu trả lời được khi có dữ liệu của cùng tuần năm ngoái. Radar sẽ ghi rõ "chưa có dữ liệu" thay vì đoán.</p>
     </div>

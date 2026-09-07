@@ -29,35 +29,35 @@ if (!fs.existsSync(cfgPath)) {
 }
 
 const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
-if (!cfg.sheetId || /DAN_ID_SHEET/.test(cfg.sheetId)) {
-  console.error(`${cfgPath}: chua dien sheetId that.`);
+
+const secSrc = path.join(src, 'secret.json');
+if (!fs.existsSync(secSrc)) {
+  console.error(`Thieu ${secSrc}.`);
+  console.error('Noi dung: {"webAppUrl": "https://script.google.com/macros/s/.../exec", "token": "..."}');
+  console.error('Tren CI: file nay duoc ghi ra tu GitHub Secret TEAM_' + teamId + '.');
   process.exit(1);
 }
 
-const keySrc = path.join(src, 'service-account.json');
-if (!fs.existsSync(keySrc)) {
-  console.error(`Thieu ${keySrc}.`);
-  console.error('Tren CI: khoa duoc ghi ra tu GitHub Secret SA_' + teamId + '.');
-  console.error('Cuc bo: chep file khoa service account cua team vao duong dan tren.');
+// Moi team phai co token RIENG. Dung chung mot token la hong ranh gioi,
+// vi token nam trong app tren may ho va trich ra duoc.
+const sec = JSON.parse(fs.readFileSync(secSrc, 'utf8'));
+if (!sec.webAppUrl || !sec.token) {
+  console.error(`${secSrc}: thieu webAppUrl hoac token.`);
   process.exit(1);
 }
-
-// Moi team phai co service account RIENG. Dung chung mot khoa la hong
-// toan bo ranh gioi, vi khoa nam trong app tren may ho va trich ra duoc.
-const key = JSON.parse(fs.readFileSync(keySrc, 'utf8'));
-if (!key.client_email || !key.private_key) {
-  console.error(`${keySrc}: khong phai khoa service account hop le.`);
+if (!/^https:\/\/script\.google\.com\//.test(sec.webAppUrl)) {
+  console.error(`${secSrc}: webAppUrl phai la dia chi Apps Script Web App.`);
   process.exit(1);
 }
 
 fs.rmSync('team', { recursive: true, force: true });
 fs.mkdirSync('team', { recursive: true });
 fs.copyFileSync(cfgPath, path.join('team', 'team.json'));
-fs.copyFileSync(keySrc, path.join('team', 'service-account.json'));
+fs.copyFileSync(secSrc, path.join('team', 'secret.json'));
 
 console.log(`Team ${cfg.id} (${cfg.name})`);
-console.log(`  Sheet: ${cfg.sheetId}`);
-console.log(`  Chia se Sheet nay cho: ${key.client_email}`);
+console.log(`  Web App: ${sec.webAppUrl.slice(0, 52)}...`);
+console.log(`  Token:   ${sec.token.slice(0, 6)}... (${sec.token.length} ky tu)`);
 
 const args = [
   ...(rest.length ? rest : ['--mac']),
